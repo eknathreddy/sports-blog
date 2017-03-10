@@ -23,15 +23,15 @@ public class Item {
 	private String link;
 
 	@ManyToOne
-	@JoinColumn(name = "post_id")
-	private Post post;
+	@JoinColumn(name = "blog_id")
+	private Blog blog;
 
-	public Post getPost() {
-		return post;
+	public Blog getBlog() {
+		return blog;
 	}
 
-	public void setPost(Post post) {
-		this.post = post;
+	public void setBlog(Blog blog) {
+		this.blog = blog;
 	}
 
 	public Integer getId() {

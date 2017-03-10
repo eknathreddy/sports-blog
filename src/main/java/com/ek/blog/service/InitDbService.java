@@ -1,6 +1,7 @@
 package com.ek.blog.service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -10,11 +11,12 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.ek.blog.entity.Post;
+import com.ek.blog.entity.Blog;
+import com.ek.blog.entity.Item;
 import com.ek.blog.entity.Role;
 import com.ek.blog.entity.User;
+import com.ek.blog.repository.BlogRepository;
 import com.ek.blog.repository.ItemRepository;
-import com.ek.blog.repository.PostRepository;
 import com.ek.blog.repository.RoleRepository;
 import com.ek.blog.repository.UserRepository;
 
@@ -32,7 +34,7 @@ public class InitDbService {
 	private ItemRepository itemRepository;
 
 	@Autowired
-	private PostRepository postRepository;
+	private BlogRepository blogRepository;
 
 	@PostConstruct
 	public void init() {
@@ -56,25 +58,25 @@ public class InitDbService {
 		userAdmin.setRoles(roles);
 		userRepository.save(userAdmin);
 
-		Post postSports = new Post();
-		postSports.setName("Cricket One Day");
-		postSports.setPost_msg("Match Between AUS and IND");
-		postSports.setUser(userAdmin);
-		postRepository.save(postSports);
+		Blog blogSports = new Blog();
+		blogSports.setName("Javavids");
+		blogSports.setUrl("http://feeds.feedburner.com/javavids?format=xml");
+		blogSports.setUser(userAdmin);
+		blogRepository.save(blogSports);
 
-		// Item item1 = new Item();
-		// item1.setPost(postSports);
-		// item1.setTitle("first");
-		// item1.setLink("http://www.javavids.com");
-		// item1.setPublishedDate(new Date());
-		// itemRepository.save(item1);
-		//
-		// Item item2 = new Item();
-		// item2.setPost(postSports);
-		// item2.setTitle("second");
-		// item2.setLink("http://www.javavids.com");
-		// item2.setPublishedDate(new Date());
-		// itemRepository.save(item2);
+		Item item1 = new Item();
+		item1.setBlog(blogSports);
+		item1.setTitle("first");
+		item1.setLink("http://www.javavids.com");
+		item1.setPublishedDate(new Date());
+		itemRepository.save(item1);
+
+		Item item2 = new Item();
+		item2.setBlog(blogSports);
+		item2.setTitle("second");
+		item2.setLink("http://www.javavids.com");
+		item2.setPublishedDate(new Date());
+		itemRepository.save(item2);
 
 	}
 }

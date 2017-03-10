@@ -9,26 +9,21 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.validation.constraints.Size;
 
 @Entity
-public class Post {
+public class Blog {
 
 	@Id
 	@GeneratedValue
 	private Integer id;
-
-	@Size(min = 2, message = "Invalid Post!")
-	private String post_msg;
-
-	@Size(min = 1, message = "Name must atleast 1 character!")
+	private String url;
 	private String name;
 
 	@ManyToOne
 	@JoinColumn(name = "user_id")
 	private User user;
 
-	@OneToMany(mappedBy = "post", cascade = CascadeType.REMOVE)
+	@OneToMany(mappedBy = "blog", cascade = CascadeType.REMOVE)
 	private List<Item> items;
 
 	public User getUser() {
@@ -55,12 +50,12 @@ public class Post {
 		this.id = id;
 	}
 
-	public String getPost_msg() {
-		return post_msg;
+	public String getUrl() {
+		return url;
 	}
 
-	public void setPost_msg(String post_msg) {
-		this.post_msg = post_msg;
+	public void setUrl(String url) {
+		this.url = url;
 	}
 
 	public String getName() {
