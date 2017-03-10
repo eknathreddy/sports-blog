@@ -18,7 +18,7 @@ public class Post {
 	@GeneratedValue
 	private Integer id;
 
-	@Size(min = 2, message = "Invalid Post!")
+	@Size(min = 2, message = "This is not a valid Post!")
 	private String post_msg;
 
 	@Size(min = 1, message = "Name must atleast 1 character!")
