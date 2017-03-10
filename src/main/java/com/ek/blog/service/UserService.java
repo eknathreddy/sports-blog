@@ -10,12 +10,12 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.ek.blog.entity.Blog;
 import com.ek.blog.entity.Item;
+import com.ek.blog.entity.Post;
 import com.ek.blog.entity.Role;
 import com.ek.blog.entity.User;
-import com.ek.blog.repository.BlogRepository;
 import com.ek.blog.repository.ItemRepository;
+import com.ek.blog.repository.PostRepository;
 import com.ek.blog.repository.RoleRepository;
 import com.ek.blog.repository.UserRepository;
 
@@ -30,7 +30,7 @@ public class UserService {
 	private RoleRepository roleRepository;
 
 	@Autowired
-	private BlogRepository blogRepository;
+	private PostRepository postRepository;
 
 	@Autowired
 	private ItemRepository itemRepository;
@@ -44,15 +44,14 @@ public class UserService {
 	}
 
 	@Transactional
-	public User findOneWithBlogs(int id) {
+	public User findOneWithPosts(int id) {
 		User user = findOne(id);
-		List<Blog> blogs = blogRepository.findByUser(user);
-		for (Blog blog : blogs) {
-			List<Item> items = itemRepository.findByBlog(blog, new PageRequest(
-					0, 10, Direction.DESC, "publishedDate"));
-			blog.setItems(items);
+		List<Post> posts = postRepository.findByUser(user);
+		for (Post post : posts) {
+			List<Item> items = itemRepository.findByPost(post, new PageRequest(0, 10, Direction.DESC, "publishedDate"));
+			post.setItems(items);
 		}
-		user.setBlogs(blogs);
+		user.setPosts(posts);
 		return user;
 	}
 
@@ -68,13 +67,17 @@ public class UserService {
 		userRepository.save(user);
 	}
 
-	public User findOneWithBlogs(String name) {
+	public User findOneWithPosts(String name) {
 		User user = userRepository.findByName(name);
-		return findOneWithBlogs(user.getId());
+		return findOneWithPosts(user.getId());
 	}
 
 	public void delete(int id) {
 		userRepository.delete(id);
+	}
+
+	public User findOne(String username) {
+		return userRepository.findByName(username);
 	}
 
 }

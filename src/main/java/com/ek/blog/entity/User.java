@@ -3,12 +3,18 @@ package com.ek.blog.entity;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.Email;
+
+import com.ek.blog.annotation.UniqueUser;
 
 @Entity
 public class User {
@@ -16,8 +22,17 @@ public class User {
 	@Id
 	@GeneratedValue
 	private Integer id;
+
+	@Size(min = 3, message = "Name must atleast 3 character!")
+	@Column(unique = true)
+	@UniqueUser(message = "Username already exsits!")
 	private String name;
+
+	@Size(min = 3, message = "Invalid Email!")
+	@Email(message = "Invalid Email!")
 	private String email;
+
+	@Size(min = 5, message = "Password must atleast 5 character!")
 	private String password;
 	private boolean enabled;
 
@@ -26,14 +41,14 @@ public class User {
 	private List<Role> roles;
 
 	@OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
-	private List<Blog> blogs;
+	private List<Post> posts;
 
-	public List<Blog> getBlogs() {
-		return blogs;
+	public List<Post> getPosts() {
+		return posts;
 	}
 
-	public void setBlogs(List<Blog> blogs) {
-		this.blogs = blogs;
+	public void setPosts(List<Post> posts) {
+		this.posts = posts;
 	}
 
 	public List<Role> getRoles() {
