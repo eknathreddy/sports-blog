@@ -1,6 +1,7 @@
 package com.ek.blog.service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -60,6 +61,11 @@ public class InitDbService {
 		postSports.setName("Cricket One Day");
 		postSports.setPost_msg("Match Between AUS and IND");
 		postSports.setUser(userAdmin);
+
+		Date dateobj = new Date();
+		System.out.println(dateobj);
+		postSports.setPublishedDate(dateobj);
+
 		postRepository.save(postSports);
 
 		// Item item1 = new Item();

@@ -1,8 +1,10 @@
 package com.ek.blog.entity;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -27,6 +29,9 @@ public class Post {
 	@ManyToOne
 	@JoinColumn(name = "user_id")
 	private User user;
+
+	@Column(name = "published_date")
+	private Date publishedDate;
 
 	@OneToMany(mappedBy = "post", cascade = CascadeType.REMOVE)
 	private List<Item> items;
@@ -69,6 +74,14 @@ public class Post {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public Date getPublishedDate() {
+		return publishedDate;
+	}
+
+	public void setPublishedDate(Date publishedDate) {
+		this.publishedDate = publishedDate;
 	}
 
 }

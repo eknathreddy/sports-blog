@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
+<%@ include file="../layouts/taglib.jsp"%>
+
 <style>
 .form-signin {
 	max-width: 330px;
@@ -43,9 +45,16 @@
 }
 </style>
 
+
 <form class="form-signin" action="/j_spring_security_check" method="post">
 	<h2 class="form-signin-heading">Please sign in</h2>
 	<input type="text" name='j_username' class="form-control" placeholder="Name" required autofocus> 
 	<input type="password" name='j_password' class="form-control" placeholder="Password" required>
 	<button class="btn btn-lg btn-primary btn-block" name="submit" type="submit">Sign in</button>
 </form>
+
+<div align="center">
+<form:form method = "POST" action ="/Fblogin.html" id="form1">
+	<div scope="public_profile,email" onlogin="checkLoginState()" class="fb-login-button" data-max-rows="1" data-size="large" data-show-faces="false" data-auto-logout-link="true"></div>
+</form:form>
+</div>

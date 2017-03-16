@@ -10,10 +10,12 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.ek.blog.entity.FBUser;
 import com.ek.blog.entity.Item;
 import com.ek.blog.entity.Post;
 import com.ek.blog.entity.Role;
 import com.ek.blog.entity.User;
+import com.ek.blog.repository.FBUserRepository;
 import com.ek.blog.repository.ItemRepository;
 import com.ek.blog.repository.PostRepository;
 import com.ek.blog.repository.RoleRepository;
@@ -35,6 +37,9 @@ public class UserService {
 	@Autowired
 	private ItemRepository itemRepository;
 
+	@Autowired
+	private FBUserRepository fbUserRepository;
+
 	public List<User> findAll() {
 		return userRepository.findAll();
 	}
@@ -53,6 +58,14 @@ public class UserService {
 		}
 		user.setPosts(posts);
 		return user;
+	}
+
+	public void saveFb(FBUser user) {
+		fbUserRepository.save(user);
+	}
+
+	public FBUser finduser(String id) {
+		return fbUserRepository.findOne(id);
 	}
 
 	public void save(User user) {

@@ -20,7 +20,7 @@
   <!-- Nav tabs -->
   <ul class="nav nav-tabs">
   	<c:forEach items="${user.posts}" var="post">
-  		<li><a href="#post_${post.id}" aria-controls="#post_${post.id}" data-toggle="tab">${blog.name}</a></li>
+  		<li><a href="#post_${post.id}" aria-controls="#post_${post.id}" data-toggle="tab">${post.name}</a></li>
   	</c:forEach>
   </ul>
 
