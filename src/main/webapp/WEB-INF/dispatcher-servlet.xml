@@ -19,8 +19,13 @@
     </property>
 </bean>
 
+<!-- <bean class="org.springframework.social.connect.web.ConnectController">
+    relies on by-type autowiring for the constructor-args
+</bean> -->
+
 <bean id="viewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
     <property name="viewClass" value="org.springframework.web.servlet.view.tiles3.TilesView"/>
 </bean>
+
 
 </beans>

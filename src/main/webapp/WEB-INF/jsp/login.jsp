@@ -2,7 +2,10 @@
 	pageEncoding="UTF-8"%>
 
 <%@ include file="../layouts/taglib.jsp"%>
-
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="sf" %>
+<%-- <%@ page session="false" %> --%>
 <style>
 .form-signin {
 	max-width: 330px;
@@ -54,7 +57,12 @@
 </form>
 
 <div align="center">
-<form:form method = "POST" action ="/Fblogin.html" id="form1">
+<%-- <form:form method = "GET" action ='<spring:url value="/connect.html" />'> --%>
+<c:url value="/connect/facebook.html" var="connectUrl" />
+<sf:form action="${connectUrl}" method="POST">
+	<input type="hidden" name="scope" value="user_posts" />
+	<p><button type="submit">Connect to Facebook</button></p>
+	
 	<div scope="public_profile,email" onlogin="checkLoginState()" class="fb-login-button" data-max-rows="1" data-size="large" data-show-faces="false" data-auto-logout-link="true"></div>
-</form:form>
+</sf:form>
 </div>

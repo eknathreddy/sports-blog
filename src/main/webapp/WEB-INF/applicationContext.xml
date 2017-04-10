@@ -14,7 +14,11 @@
 			expression="org.springframework.stereotype.Controller" />
 	</context:component-scan>
 
-	<jdbc:embedded-database type="HSQL" id="dataSource" />
+	<jdbc:embedded-database type="HSQL" id="dataSource">
+			
+			<jdbc:script location="classpath:/org/springframework/social/connect/jdbc/JdbcUsersConnectionRepository.sql" />
+		
+	</jdbc:embedded-database>	
 
 	<bean class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean" id="emf">
 
@@ -31,6 +35,9 @@
 		</property>
 
 	</bean>
+	
+
+	
 	<tx:annotation-driven transaction-manager="transactionManager" />
 
 	<bean class="org.springframework.orm.jpa.JpaTransactionManager" id="transactionManager">

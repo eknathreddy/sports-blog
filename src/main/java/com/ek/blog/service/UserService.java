@@ -82,6 +82,7 @@ public class UserService {
 
 	public User findOneWithPosts(String name) {
 		User user = userRepository.findByName(name);
+		System.out.print(user.getId());
 		return findOneWithPosts(user.getId());
 	}
 

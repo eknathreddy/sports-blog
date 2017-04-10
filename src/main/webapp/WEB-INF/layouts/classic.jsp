@@ -10,6 +10,8 @@
 <meta property="fb:app_id" content="1061497727327521" />
 
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="sf" %>
 
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -43,7 +45,6 @@
 			if (response.status === 'connected') {
 				// Logged into your app and Facebook.
 				testAPI();
-				document.getElementById("form1").submit();
 			} else if (response.status === 'not_authorized') {
 				// The person is logged into Facebook, but not your app.
 				document.getElementById('status').innerHTML = 'Please log '
@@ -62,6 +63,11 @@
 		function checkLoginState() {
 			FB.getLoginStatus(function(response) {
 				statusChangeCallback(response);
+			});
+		}
+		function logoutFB() {
+			FB.logout(function(response) {
+				   // Person is now logged out
 			});
 		}
 
@@ -90,12 +96,6 @@
 			FB.getLoginStatus(function(response) {
 				statusChangeCallback(response);
 			});
-			
-			FB.logout(function(response) {
-				   // Person is now logged out
-					document.getElementById('status').innerHTML =
-		        	'Logout Sucessful!';
-				});
 
 		};
 		  
@@ -160,7 +160,7 @@
 						</security:authorize>
 						<security:authorize access="isAuthenticated()">
 							<li class="${current == 'account' ? 'active' : '' }"><a href='<spring:url value="/account.html" />'>My Account</a></li>
-							<li><a href='<spring:url value="/logout" />'>Logout</a></li>
+							<li><a href='<spring:url value="/logout" />' onclick="logoutFB()" >Logout</a></li>
 						</security:authorize>
 						<li><div id="status"></div></li>
 					</ul>

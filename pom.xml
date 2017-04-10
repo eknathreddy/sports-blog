@@ -10,26 +10,28 @@
 		<org.springframework.version>4.3.6.RELEASE</org.springframework.version>
 		<apache.tiles>3.0.7</apache.tiles>
 		<spring.security.version>3.2.10.RELEASE</spring.security.version>
+		<org.springframework.social-version>1.1.4.RELEASE</org.springframework.social-version>
 	</properties>
 	
+	
 	<dependencies>
-		<dependency>
-			<groupId>org.springframework.social</groupId>
-			<artifactId>spring-social-core</artifactId>
-			<version>1.1.4.RELEASE</version>
-		</dependency>
-        
-        <dependency>
-        	<groupId>org.springframework.social</groupId>
-        	<artifactId>spring-social-facebook</artifactId>
-        	<version>2.0.3.RELEASE</version>
-        </dependency>
+	<dependency>
+		<groupId>org.springframework.social</groupId>
+		<artifactId>spring-social-facebook</artifactId>
+		<version>3.0.0.M1</version>
+	</dependency>
 
-        <!--        <dependency>
-            <groupId>org.springframework.social</groupId>
-            <artifactId>spring-social-facebook</artifactId>
-            <version>1.5.1.RELEASE</version>
-        </dependency> -->
+	<dependency>
+		<groupId>org.springframework.social</groupId>
+		<artifactId>spring-social-core</artifactId>
+		<version>${org.springframework.social-version}</version>
+	</dependency>
+
+	<dependency>
+		<groupId>org.springframework.social</groupId>
+		<artifactId>spring-social-web</artifactId>
+		<version>${org.springframework.social-version}</version>
+	</dependency>
         
 	
 		<dependency>
@@ -219,6 +221,32 @@
 			<artifactId>javax.servlet</artifactId>
 			<version>3.0.0.v201112011016</version>
 		</dependency>
+		
+		<!-- CGLIB, only required and used for @Configuration usage -->
+		<dependency>
+			<groupId>cglib</groupId>
+			<artifactId>cglib-nodep</artifactId>
+			<version>2.2</version>
+		</dependency>
+		
+		<!-- @Inject -->
+		<dependency>
+			<groupId>javax.inject</groupId>
+			<artifactId>javax.inject</artifactId>
+			<version>1</version>
+		</dependency>
+		
+		
+		<dependency>
+   			<groupId>com.fasterxml.jackson.core</groupId>
+    		<artifactId>jackson-core</artifactId>
+    		<version>2.5.4</version>
+		</dependency>
+		<dependency>
+    		<groupId>com.fasterxml.jackson.core</groupId>
+    		<artifactId>jackson-databind</artifactId>
+    		<version>2.5.4</version>
+		</dependency>
 
 
 	</dependencies>
@@ -246,6 +274,7 @@
 		</plugins>
 	</build>
 	
+	
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
@@ -259,24 +288,23 @@
 	</dependencyManagement>
 	
 	    <repositories>
-        <repository>
-            <id>spring-snapshots</id>
-            <name>Spring Snapshots</name>
-            <url>https://repo.spring.io/libs-milestone</url>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-    </repositories>
-    <pluginRepositories>
-        <pluginRepository>
-            <id>spring-snapshots</id>
-            <name>Spring Snapshots</name>
-            <url>https://repo.spring.io/libs-milestone</url>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </pluginRepository>
-    </pluginRepositories>
+	<repository>
+		<id>spring-repo</id>
+		<name>Spring Repository</name>
+		<url>http://repo.spring.io/release</url>
+	</repository>
+
+	<repository>
+		<id>spring-milestone</id>
+		<name>Spring Milestone Repository</name>
+		<url>http://repo.spring.io/milestone</url>
+	</repository>
+
+	<repository>
+		<id>spring-snapshot</id>
+		<name>Spring Snapshot Repository</name>
+		<url>http://repo.spring.io/snapshot</url>
+	</repository>
+</repositories>
 
 </project>
