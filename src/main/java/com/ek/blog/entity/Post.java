@@ -36,6 +36,8 @@ public class Post {
 	@OneToMany(mappedBy = "post", cascade = CascadeType.REMOVE)
 	private List<Item> items;
 
+	private boolean reviewed;
+
 	public User getUser() {
 		return user;
 	}
@@ -82,6 +84,14 @@ public class Post {
 
 	public void setPublishedDate(Date publishedDate) {
 		this.publishedDate = publishedDate;
+	}
+
+	public boolean isReviewed() {
+		return reviewed;
+	}
+
+	public void setReviewed(boolean reviewed) {
+		this.reviewed = reviewed;
 	}
 
 }

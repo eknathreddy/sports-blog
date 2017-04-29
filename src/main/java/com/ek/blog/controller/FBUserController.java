@@ -46,10 +46,9 @@ public class FBUserController {
 		String[] fields = { "id", "email", "name" };
 		try {
 			FBUser fbuser = facebook.fetchObject("me", FBUser.class, fields);
-			System.out.println("In Fblogin");
 			if (userService.finduser(fbuser.getId()) == null) {
 				userService.saveFb(fbuser);
-
+				System.out.println("User doesnot exists in user!!!!");
 				System.out.println(fbuser.getId());
 				System.out.println(fbuser.getName());
 				System.out.println(fbuser.getEmail());
@@ -60,6 +59,11 @@ public class FBUserController {
 
 				// http.authorizeRequests().antMatchers("/account**").hasRole("ROLE_USER").anyRequest().authenticated();
 			} else {
+				System.out.println("User exists in user!!!!");
+				System.out.println(fbuser.getId());
+				System.out.println(fbuser.getName());
+				System.out.println(fbuser.getEmail());
+				user.setName(fbuser.getName());
 				// http.authorizeRequests().antMatchers("/account**").hasRole("ROLE_USER").anyRequest().authenticated();
 			}
 		} catch (Exception e) {

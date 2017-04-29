@@ -61,12 +61,20 @@ public class InitDbService {
 		postSports.setName("Cricket One Day");
 		postSports.setPost_msg("Match Between AUS and IND");
 		postSports.setUser(userAdmin);
-
+		postSports.setReviewed(true);
 		Date dateobj = new Date();
 		System.out.println(dateobj);
 		postSports.setPublishedDate(dateobj);
 
 		postRepository.save(postSports);
+
+		Post postSports1 = new Post();
+		postSports1.setName("IPL Match");
+		postSports1.setPost_msg("Match Between MI and SRH");
+		postSports.setReviewed(false);
+		postSports1.setUser(userAdmin);
+		postSports1.setPublishedDate(dateobj);
+		postRepository.save(postSports1);
 
 		// Item item1 = new Item();
 		// item1.setPost(postSports);

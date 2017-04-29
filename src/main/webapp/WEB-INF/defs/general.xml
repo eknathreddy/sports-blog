@@ -54,5 +54,11 @@
 		<put-attribute name="body" value="/WEB-INF/jsp/status.jsp" />
 		<put-attribute name="current" value="status" />
 	</definition>
+	
+	<definition name="reviewPosts" extends="common">
+		<put-attribute name="title" value="ReviewPosts" />
+		<put-attribute name="body" value="/WEB-INF/jsp/reviewPosts.jsp" />
+		<put-attribute name="current" value="reviewPosts" />
+	</definition>
 
 </tiles-definitions>

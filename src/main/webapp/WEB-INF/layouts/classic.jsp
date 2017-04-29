@@ -153,6 +153,7 @@
 						<li class="${current == 'index' ? 'active' : '' }"><a href='<spring:url value="/" />' >Home</a></li>
 						<security:authorize access="hasRole('ROLE_ADMIN')">
 							<li class="${current == 'users' ? 'active' : '' }"><a href='<spring:url value="/users.html" />'>Users</a></li>
+							<li class="${current == 'reviewPosts' ? 'active' : '' }"><a href='<spring:url value="/reviewPosts.html" />'>Review Posts</a></li>
 						</security:authorize>
 						<li class="${current == 'register' ? 'active' : '' }"><a href='<spring:url value="/register.html" />'>Register</a></li>
 						<security:authorize access="!isAuthenticated()">

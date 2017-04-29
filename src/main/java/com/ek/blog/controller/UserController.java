@@ -34,7 +34,7 @@ public class UserController {
 	@RequestMapping("/account")
 	public String account(Model model, Principal principal) {
 		String name = principal.getName();
-		System.out.print("-->name" + name);
+		// System.out.print("-->name :" + name);
 		model.addAttribute("user", userService.findOneWithPosts(name));
 		return "account";
 	}
@@ -54,7 +54,20 @@ public class UserController {
 	public String removePost(@PathVariable int id) {
 		Post post = postService.findOne(id);
 		postService.delete(post);
-		return "redirect:/account.html";
+		return "redirect:/reviewPosts.html";
+	}
+
+	@RequestMapping("/post/accept/{id}")
+	public String appectPost(@PathVariable int id) {
+		postService.acceptPost(id);
+		System.out.println("Update Successful!!");
+		return "redirect:/reviewPosts.html";
+	}
+
+	@RequestMapping("/reviewPosts")
+	public String unreviewedPosts(Model model) {
+		model.addAttribute("posts", postService.getPosts());
+		return "reviewPosts";
 	}
 
 }

@@ -22,7 +22,8 @@ newDate = yr + '-' + month + '-' + day;
 		</tr>
 	</thead>
 	<tbody>
-		<c:forEach items="${posts}" var="post">
+		<c:forEach  items="${posts}" var="post">
+		<c:if test="${post.reviewed eq true}">
 			<tr>
 				<td>${post.name}</td>
 				<td><a href='<spring:url value="/index/${post.id}.html" />'>
@@ -34,6 +35,7 @@ newDate = yr + '-' + month + '-' + day;
 					</a>
 				 </td>
 			</tr>
+		</c:if>
 		</c:forEach>
 	</tbody>
 </table>

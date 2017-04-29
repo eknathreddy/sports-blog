@@ -15,6 +15,7 @@ import com.ek.blog.entity.User;
 import com.ek.blog.repository.PostRepository;
 import com.ek.blog.repository.UserRepository;
 
+//@PersistenceContext(type = PersistenceContextType.EXTENDED)
 @Service
 public class PostService {
 
@@ -27,6 +28,7 @@ public class PostService {
 	public void save(Post post, String name) {
 		User user = userRepository.findByName(name);
 		post.setUser(user);
+		post.setReviewed(false);
 		Date dateobj = new Date();
 		System.out.println(dateobj);
 		post.setPublishedDate(dateobj);
@@ -43,7 +45,13 @@ public class PostService {
 	}
 
 	public List<Post> getPosts() {
+		// List<Post> post = postRepository.findByReviewed(true);
 		return postRepository.findAll(new PageRequest(0, 10, Direction.DESC, "name")).getContent();
 	}
 
+	public void acceptPost(int id) {
+		Post post = postRepository.findOne(id);
+		post.setReviewed(true);
+		postRepository.save(post);
+	}
 }

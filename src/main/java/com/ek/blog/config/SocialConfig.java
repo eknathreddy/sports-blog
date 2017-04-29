@@ -42,12 +42,11 @@ public class SocialConfig {
 	@Bean
 	@Scope(value = "request", proxyMode = ScopedProxyMode.INTERFACES)
 	public ConnectionRepository connectionRepository() {
-		System.out.println("---> ConnectionRes");
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		if (authentication == null) {
 			throw new IllegalStateException("Unable to get a ConnectionRepository: no user signed in");
 		}
-		System.out.println("--->" + authentication.getName());
+		// System.out.println("--->" + authentication.getName());
 		return usersConnectionRepository().createConnectionRepository(authentication.getName());
 	}
 
@@ -60,7 +59,7 @@ public class SocialConfig {
 
 	@Bean
 	public UsersConnectionRepository usersConnectionRepository() {
-		System.out.println("---> UserConnection");
+		// System.out.println("---> UserConnection");
 		return new JdbcUsersConnectionRepository(dataSource, connectionFactoryLocator(), textEncryptor);
 	}
 
@@ -72,7 +71,7 @@ public class SocialConfig {
 
 	@Bean
 	public ConnectController connectController() {
-		System.out.print("-----> Connectcontrol Bean Successful!!!");
+		// System.out.print("-----> Connectcontrol Bean Successful!!!");
 		ConnectController controller = new ConnectController(connectionFactoryLocator(), connectionRepository());
 		// controller.setApplicationUrl(environment.getProperty("application.url"));
 
