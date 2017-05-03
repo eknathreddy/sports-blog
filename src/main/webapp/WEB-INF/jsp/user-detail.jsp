@@ -34,22 +34,6 @@
 					<a href='<spring:url value="/post/remove/${post.id}.html" />' class="btn btn-danger triggerRemove" >Remove post</a>
 				</p>
 
-				<table class="table table-bordered table-hover table-striped">
-					<thead>
-						<tr>
-							<th>Title</th>
-							<th>Link</th>
-						</tr>
-					</thead>
-					<tbody>
-						<c:forEach items="${post.items}" var="item">
-							<tr>
-								<td>${item.title}</td>
-								<td>${item.link}</td>
-							</tr>
-						</c:forEach>
-					</tbody>
-				</table>
 			</div>
 		</c:forEach>
 	</div>
